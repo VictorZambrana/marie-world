@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Beloved Marie Paz's Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, #ffc0cb, #ff69b4);
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        .player-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .playlist {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        .playlist li {
+            background: #ffb6c1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .playlist li:hover {
+            background: #ff69b4;
+        }
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .bubble {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); }
+            100% { transform: translateY(-10vh) scale(1.2); }
+        }
+        .images-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .images-container img {
+            width: 150px;
+            height: auto;
+            transform: rotate(-10deg);
+            border-radius: 10px;
+        }
+        .images-container img:last-child {
+            transform: rotate(10deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>My Beloved Marie Paz's Playlist</h1>
+    <div class="player-container">
+        <audio id="audioPlayer" controls>
+            Your browser does not support the audio element.
+        </audio>
+        <ul id="playlist" class="playlist"></ul>
+    </div>
+    <div class="bubbles"></div>
+    <div class="images-container">
+        <img src="assets/Marie1.jpg" alt="Romantic Image 1">
+        <img src="assets/Marie2.jpg" alt="Romantic Image 2">
+    </div>
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playlist = document.getElementById('playlist');
+        const bubblesContainer = document.querySelector('.bubbles');
+
+        const songs = [
+            "Always - Daniel Caesar.mp3", 
+            "Die With a Smile - Bruno Mars ft Lady Gaga.mp3", 
+            "Pagsamo - Arthur Nery.mp3",
+            "Palagi - TJ Monterde.mp3",
+            "Paraluman - Adie.mp3",
+            "Perfect -  Ed Sheeran.mp3",
+            "Puhon - TJ Monterde.mp3",
+            "Tahanan - Adie.mp3",
+            "The One - Kodaline.mp3",
+            "Until I found You - Stephen Sanchez.mp3"
+        ];
+        songs.forEach(song => {
+            let li = document.createElement('li');
+            li.textContent = song.replace('.mp3', '');
+            li.onclick = () => {
+                audioPlayer.src = `assets/${song}`;
+                audioPlayer.play();
+            };
+            playlist.appendChild(li);
+        });
+
+        for (let i = 0; i < 10; i++) {
+            let bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            bubble.style.opacity = Math.random();
+            bubblesContainer.appendChild(bubble);
+        }
+    </script>
+</body>
+</html>
